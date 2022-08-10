@@ -1,0 +1,233 @@
+*{
+  margin: 0px;
+  padding: 0px;
+}
+
+bodu{
+
+@mixin translate50
+{
+  -webkit-transform: translate(-50, -50%);
+  -ms-transform: translate(-50, -50%);
+  -o-transform: translate(-50, -50%);
+  transform: translate(-50, -50%);
+}
+
+@mixin roundedCorners
+{
+  -webkit-border-radius: 50%; 
+  -moz-border-radius: 50%; 
+  border-radius: 50%;
+}
+
+@mixin rotateBase
+{
+  -webkit-transform: rotate3d(-1, 1, 0, 0deg);
+  -ms-transform: rotate3d(-1, 1, 0, 0deg);
+  -o-transform: rotate3d(-1, 1, 0, 0deg);
+  transform: rotate3d(-1, 1, 0, 0deg);
+}
+
+@mixin rotateRight
+{
+  -webkit-transform: rotate3d(-1, 1, 0, 30deg);
+  -ms-transform: rotate3d(-1, 1, 0, 30deg);
+  -o-transform: rotate3d(-1, 1, 0, 30deg);
+  transform: rotate3d(-1, 1, 0, 30deg);
+}
+
+@mixin rotateLeft
+{
+  -webkit-transform: rotate3d(-1, 1, 0, -30deg);
+  -ms-transform: rotate3d(-1, 1, 0, -30deg);
+  -o-transform: rotate3d(-1, 1, 0, -30deg);
+  transform: rotate3d(-1, 1, 0, -30deg);
+}
+
+// n is number of stars generated
+@function generateStars ($n)
+{ 
+  $value: '#{0} #{random(2000)}px #{random(2000)}px #FFF';
+
+  @for $i from 2 through $n
+  {
+    $value: '#{$value} , #{random(2000)}px #{random(2000)}px #FFF';
+  }
+
+  @return unquote($value);
+}
+
+$stars-small:  generateStars(700);
+$stars-medium: generateStars(200);
+$stars-big:    generateStars(100);
+
+body
+{
+  overflow: hidden;
+}
+
+#stars-container
+{
+  height: 200vh;
+  width: 200%;
+  background: radial-gradient(ellipse at bottom, #eee 0%, #eee 100%);
+  overflow: hidden;
+  @include translate50;
+}
+    
+#stars
+{
+  width: 1px;
+  height: 1px;
+  background: transparent;
+  box-shadow: $stars-small;
+  animation : animateStars 1s ease-in-out infinite;
+  @include roundedCorners;
+
+  &::after
+  {
+    content: " ";
+    position: absolute;
+    margin: auto;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 1px;
+    height: 1px;
+    background: transparent;
+    box-shadow: $stars-small;
+    @include roundedCorners;
+  }
+}
+    
+#stars2
+{
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  box-shadow: $stars-medium;
+  animation : animateStars 5s ease-in-out infinite;
+  @include roundedCorners;
+    
+  &::after
+  {
+    content: " ";
+    position: absolute;
+    margin: auto;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 2px;
+    height: 2px;
+    background: transparent;
+    box-shadow: $stars-medium;
+    @include roundedCorners;
+  }
+}
+    
+#stars3
+{
+  width: 1px;
+  height: 1px;
+  background: transparent;
+  box-shadow: $stars-big;
+  animation : animateStars 5s ease-in-out infinite;
+  @include roundedCorners;
+    
+  &:after
+  {
+    content: " ";
+    position: absolute;
+    margin: auto;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 1px;
+    height: 1px;
+    background: transparent;
+    box-shadow: $stars-big;
+    @include roundedCorners;
+  }
+}
+
+@keyframes animateStars
+{
+  0%{@include rotateBase;}
+  25%{@include rotateRight;}
+  50%{@include rotateBase;}
+  75%{@include rotateLeft;}
+  100%{@include rotateBase;}
+}
+}  
+
+
+
+  
+h1 {
+  font-family: 'Dosis', sans-serif;
+  text-align: center;
+  text-shadow: 1px 1px white;
+  color: white;
+  background: -webkit-linear-gradient(#FFFFFF, #eee);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 100px;
+  padding-top: 2em;
+  padding-bottom: 0.5em;
+}
+
+h2 {
+  font-family: 'Dosis', sans-serif;
+  text-align: center;
+  color: #FFFFFF;
+  font-size: 35px;
+  font-weight: normal;
+  padding-bottom: 0.5em;
+
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-right: 30%;
+  margin-left: 30%;
+}
+
+.p1 {
+  font-family: 'Dosis', sans-serif;
+  text-align: center;
+  text-shadow: 0.5px 0.5px white;
+  color: #FFFFFF;
+  font-size: 30px;
+  font-weight: normal;
+  padding-top: 2.2em;
+  padding-bottom: 1em;
+
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-right: 20%;
+  margin-left: 20%;
+}
+
+ul {
+  list-style-type: none;
+  overflow: hidden;
+  padding: 0.5em;
+  background-color: #white
+}
+
+li {
+  display: inline;
+  font-family: 'Dosis', sans-serif;
+  font-size: 25px;
+}
+
+li a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.3em;
+  padding: 1em;
+}
+
+li a:hover {
+  background-color: #eee;
+}
+
+
+
+<!-- About me -->
+
+h4 {
+  color: blue;
+}
